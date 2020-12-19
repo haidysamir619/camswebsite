@@ -47,5 +47,14 @@ class FavouriteController extends Controller
         return redirect()->back()->with(['added'=>'please login first']);
 
     }
+
+    }
+    public function deletefromfavourite($id){
+        $user = auth()->user();
+        $product=Favourite::where('product_id',$id)->where('user_id',$user->id)->select();
+         $product->delete();
+         return redirect()->back()->with(['added'=>'deleted from cart']);
+        // return route('cart');
+
     }
 }

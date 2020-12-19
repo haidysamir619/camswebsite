@@ -35,7 +35,6 @@ class CartController extends Controller
         if($user){
         $exist=Cart::where('product_id',$id)->where('user_id',$user->id)->get();
         if($exist->isEmpty()){
-
         $cart= new cart();//new row in db
         $cart->quantity=1;
         $cart->user_id=$user->id;
@@ -52,29 +51,22 @@ return redirect()->back()->with(['added'=>'please login first']);
 
     }
     public function deletefromcart($id){
-        $products=Cart::where('product_id',$id)->get();
-        foreach($products as $product){
-            $product->delete();
-        }
-
+        $user = auth()->user();
+        $product=Cart::where('product_id',$id)->where('user_id',$user->id)->select();
+        $product->delete();
         return redirect()->back()->with(['deleted'=>'deleted from cart']);
-        // return route('cart');
-
     }
     public function updatecart(Request $request){
         $cart=Cart::find($request->cartid);
         $cart->quantity=$request->get('quantity');
         $cart->save();
         return redirect()->back()->with(['deleted'=>'updated']);
-
-
     }
     public function processtocheckout(){
         $user = auth()->user();
         $products=Cart::with('product')->where('user_id',$user->id)->get();
         if($products->isEmpty()){
             return redirect()->back()->with(['added'=>'cart is empty']);
-
         }
         else{
         $productcount=0;

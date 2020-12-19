@@ -79,7 +79,8 @@
              <div class="form-group ">
                 <div class="row ">
                   <select name="country" class="form-control m-2 col-4" id="countryId">
-                    <option value="">Select Country</option>
+                    <option value="" data-value="" class="select">Select Country</option>
+                    <option value="{{$member->country}}" selected class="chosen-country">{{$member->country}}</option>
                   </select>
                   @error('country')
                   <span class="bg-danger" role="alert">
@@ -87,7 +88,9 @@
                   </span>
                 @enderror
                   <select name="state" class="form-control m-2 col-4" id="stateId">
-                    <option value="">Select State</option>
+                    <option value="" data-value="" class="select">Select State</option>
+                    <option value="{{$member->state}}" selected class="chosen-state">{{$member->state}}</option>
+
                   </select>
                   @error('state')
                   <span class="bg-danger" role="alert">
@@ -95,7 +98,8 @@
                   </span>
                 @enderror
                   <select name="city" class="form-control m-2 col-3" id="cityId">
-                    <option value="">Select City</option>
+                    <option value="" class="select">Select city</option>
+                    <option value="{{$member->city}}" selected class="chosen-city">{{$member->city}}</option>
                   </select>
                   @error('city')
                   <span class="bg-danger" role="alert">

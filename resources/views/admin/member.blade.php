@@ -21,7 +21,6 @@
                         <td>city</td>
                         <td>address</td>
                         <td>gender</td>
-                        <td>image</td>
                         <td>control</td>
 
                      </tr>
@@ -37,7 +36,6 @@
                         <td>{{$member->city}}</td>
                         <td>{{$member->address}}</td>
                         <td>{{$member->gender}}</td>
-                        <td><img src="{{asset($member->image)}}" width="95" height="95"></td>
                         <td>
                             <a href="{{route('delete_member',$member->id)}}" class="d-inline-block control-button delete mb-2 m-lg-0"><i class="fas fa-trash-alt"></i> delete</a>
                           <a href="{{route('edit_member',$member->id)}}" class="d-inline-block control-button edit "><i class="fa fa-edit"></i> edit</a>

@@ -142,6 +142,8 @@
 
             <div class="col-md-9 mb-5" onclick="location.href='{{route('product_show',$product->id)}}';">
                <div class="item" >
+                <span class="show-product float-right"><i class="fa fa-eye fa-lg"onclick="location.href='{{route('product_show',$product->id)}}';"></i></span>
+
                   <div class="case">
                     @php
                     $status=$product->status;

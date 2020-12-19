@@ -1,6 +1,5 @@
 <?php
-
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\CategoryController;
@@ -47,6 +46,8 @@ Route::get('/update_cart',[CartController::class,'updatecart'])->name('update_ca
 /*start FavouriteController */
 Route::get('/add_to_favourite/{id}',[FavouriteController::class,'addtofavourite'])->name('add_to_favourite');
 Route::get('/favouritelist',[FavouriteController::class,'favouritelist'])->name('favouritelist');
+Route::get('/delete_from_favourite/{id}',[FavouriteController::class,'deletefromfavourite'])->name('delete_from_favourite');
+
 /*end FavouriteController */
 
 /******************start admin section*******************/
