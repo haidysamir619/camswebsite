@@ -50,19 +50,17 @@ class User extends Authenticatable
     ];
 
     public function carts(){
-            $this->hasMany('App\Model\Cart');
+           return  $this->hasMany('App\Model\Cart');
         }
     public function receipts(){
             return  $this->hasMany('App\Models\Receipt');
       }
     public function feedbacks(){
-            $this->hasMany('App\Model\Feedback');
+      return       $this->hasMany('App\Model\Feedback');
     }
-    public function orders(){
-        $this->hasMany('App\Model\Order');
-}
+
     public function favourites(){
-    $this->hasMany('App\Model\Favourite');
+   return  $this->hasMany('App\Model\Favourite');
 
 }
 

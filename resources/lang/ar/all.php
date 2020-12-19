@@ -66,6 +66,7 @@ return [
    'logout'=>'تسجيل خروج',
    'visit_shop'=>'زيارة المتجر',
    'admin_area'=>'منطقة الادارة',
+   'receipts'=>'الفواتير',
 
 
 

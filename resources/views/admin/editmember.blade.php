@@ -76,22 +76,26 @@
                   @enderror
                 </div>
              </fieldset>
-             <div class="form-group ">
+             {{-- <div class="form-group ">
                 <div class="row ">
-                  <select name="country" class="form-control m-2 col-4" id="countryId">
-                    <option value="" data-value="" class="select">Select Country</option>
+                  <select  class="form-control m-2 col-4" id="countryId">
+                    <option value=""  class="select">Select Country</option>
                     <option value="{{$member->country}}" selected class="chosen-country">{{$member->country}}</option>
                   </select>
+                  <input type="hidden" name="country" value="" >
+
                   @error('country')
                   <span class="bg-danger" role="alert">
                       <strong>{{ $message }}</strong>
                   </span>
                 @enderror
-                  <select name="state" class="form-control m-2 col-4" id="stateId">
-                    <option value="" data-value="" class="select">Select State</option>
+                  <select  class="form-control m-2 col-4" id="stateId">
+                    <option value=""  class="select">Select State</option>
                     <option value="{{$member->state}}" selected class="chosen-state">{{$member->state}}</option>
 
                   </select>
+                  <input type="hidden" name="state" value="" >
+
                   @error('state')
                   <span class="bg-danger" role="alert">
                       <strong>{{ $message }}</strong>
@@ -101,14 +105,14 @@
                     <option value="" class="select">Select city</option>
                     <option value="{{$member->city}}" selected class="chosen-city">{{$member->city}}</option>
                   </select>
+                  <input type="hidden" name="city" value="" >
                   @error('city')
                   <span class="bg-danger" role="alert">
                       <strong>{{ $message }}</strong>
                   </span>
                 @enderror
-
                 </div>
-              </div>
+              </div> --}}
 
               <div class="form-group mb-3">
                 <label>Your Address</label>
@@ -118,6 +122,42 @@
                         <strong>{{ $message }}</strong>
                     </span>
                   @enderror
+             </div>
+             <div class="form-group ">
+               <div class="row ">
+                 <select name="" class="form-control m-2 col-4" id="countryId">
+                   <option value="">Select Country</option>
+                   <option value="{{$member->country}}" selected class="chosen-country">{{$member->country}}</option>
+                 </select>
+                 <input type="hidden" name="country" value="{{$member->country}}" >
+                 @error('country')
+                   <span class="bg-danger" role="alert">
+                       <strong>{{ $message }}</strong>
+                   </span>
+                 @enderror
+                 <select name="" class="form-control m-2 col-4" id="stateId">
+                   <option value="">Select State</option>
+                   <option value="{{$member->state}}" selected class="chosen-city">{{$member->state}}</option>
+
+                 </select>
+                 <input type="hidden" name="state" value="{{$member->state}}" >
+                 @error('state')
+                   <span class="bg-danger" role="alert">
+                       <strong>{{ $message }}</strong>
+                   </span>
+                 @enderror
+                 <select name="" class="form-control m-2 col-3" id="cityId">
+                   <option value="">Select City</option>
+                   <option value="{{$member->city}}" selected class="chosen-city">{{$member->city}}</option>
+
+                 </select>
+                 <input type="hidden" name="city" value="{{$member->city}}" >
+                 @error('city')
+                   <span class="bg-danger" role="alert">
+                       <strong>{{ $message }}</strong>
+                   </span>
+                 @enderror
+               </div>
              </div>
              <div class="form-group row">
                 <label  class="col-sm-12 col-form-label">type</label>

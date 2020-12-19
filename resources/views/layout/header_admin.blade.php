@@ -71,6 +71,13 @@
                     <a class="nav-link" href="{{route('get_reviews')}}">{{__('all.reviews')}}</a>
                     @endif
                   </li>
+                  <li class="nav-item">
+                    @if (url()->current()==route('get_orders'))
+                    <a class="nav-link" href="#">{{__('all.receipts')}}</a>
+                    @else
+                    <a class="nav-link" href="{{route('get_orders')}}">{{__('all.receipts')}}</a>
+                    @endif
+                  </li>
                   <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->{'name_'.app()->getLocale()} }}

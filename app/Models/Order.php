@@ -12,7 +12,10 @@ class Order extends Model
         return $this->belongsTo('App\Models\Receipt');
     }
 
-    public function product(){
-        return $this->belongsTo('App\Models\Product','product_id','id');
+    public function products(){
+        return $this->belongsTo('App\Models\Product');
+    }
+    public function product(){//
+        return $this->belongsTo('App\Models\Product');
     }
 }

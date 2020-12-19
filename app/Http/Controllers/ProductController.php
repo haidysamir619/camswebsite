@@ -12,7 +12,7 @@ class ProductController extends Controller
 {
     public function get_products(){
         $products=Product::with('category','brand')->get();
-        return view('admin/products',compact('products'));
+return view('admin/products',compact('products'));
     }
     protected function validator(array $data)
     {

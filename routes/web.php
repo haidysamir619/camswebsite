@@ -42,6 +42,7 @@ Route::get('/delete_from_cart/{id}',[CartController::class,'deletefromcart'])->n
 Route::get('/process_to_checkout',[CartController::class,'processtocheckout'])->name('process_to_checkout');
 Route::get('/update_cart',[CartController::class,'updatecart'])->name('update_cart');
 Route::post('/continue_to_checkout',[CartController::class,'continuetocheckout'])->name('continue_to_checkout');
+Route::get('/get_orders',[CartController::class,'getorders'])->name('get_orders');
 
 /*end CartController */
 

@@ -200,61 +200,77 @@ $('.edit-profile').on('dblclick',function(){
     //console.log(results);
     return results;
   }
-
   var language= $("html").attr("lang"); //get language from html set lang="en" or lang ="ar" if you don't set it
 
-    /** countries **/
-  var conutriesURL = 'http://api.geonames.org/countryInfoJSON?q=&country=&lang='+language+'&username=abdulnaser_mohsen'; //url that get your conuntries
-  var countries = getAJAX(conutriesURL); // the importance of async test without aync or aync is true
-  //console.log(countries);
-  //console.log(countries.geonames);
-  $(countries.geonames).each(function(index,item){
+   /** countries **/
+   var conutriesURL = 'http://api.geonames.org/countryInfoJSON?q=&country=&lang='+language+'&username=abdulnaser_mohsen'; //url that get your conuntries
+   var countries = getAJAX(conutriesURL); // the importance of async test without aync or aync is true
+   //console.log(countries);
+   //console.log(countries.geonames);
+   $(countries.geonames).each(function(index,item){
+     //console.log(item.countryName , item.geonameId);
+     var selectOption = $("<option>")
+     selectOption.attr("value",item.geonameId).attr("data-value",item.countryName).append(item.countryName);
+     $('#countryId').append(selectOption);
+   });
 
-    //console.log(item.countryName , item.geonameId);
-    var selectOption = $("<option>")
-    selectOption.attr("value",item.geonameId).append(item.countryName);
-    $('#countryId').append(selectOption);
-  });
 
-    /** states **/
-  $(document).on("change","#countryId",function(){
+
+     /** states **/
+   $(document).on("change","#countryId",function(){
+
     $('.select').css('display','block');
     $('.chosen-city').remove();
     $('.chosen-country').remove();
     $('.chosen-state').remove();
-    $('#stateId option:not(option:first)').remove(); // clear states
 
-    var geonameid= $(this).val(); //get country id
-    var statesURL = 'http://api.geonames.org/childrenJSON?lang='+language+'&geonameId='+geonameid+'&username=abdulnaser_mohsen'; //url that get your states
+     $('#stateId option:not(option:first)').remove(); // clear states
+     $("[name='country']").val($(this).find('option:selected').attr("data-value"));
+     var geonameid= $(this).val(); //get country id
+     var statesURL = 'http://api.geonames.org/childrenJSON?lang='+language+'&geonameId='+geonameid+'&username=abdulnaser_mohsen'; //url that get your states
 
-    var states = getAJAX(statesURL);
-    console.log(states);
-    //console.log(states.geonames);
 
-    $(states.geonames).each(function(index,item){
-      //console.log(item.name , item.geonameId);
-      var selectOption = $("<option>")
-      selectOption.attr("value",item.geonameId).append(item.name);
-      $('#stateId').append(selectOption);
-    });
-  });
 
-  $(document).on("change","#stateId",function(){
-    $('#cityId option:not(option:first)').remove(); // clear cities
+     var states = getAJAX(statesURL);
+     console.log(states);
+     //console.log(states.geonames);
 
-    var geonameid= $(this).val(); //get country id
-    var citiesURL = 'http://api.geonames.org/childrenJSON?lang='+language+'&geonameId='+geonameid+'&username=abdulnaser_mohsen'; //url that get your cities
 
-    var cities = getAJAX(citiesURL);
-    //console.log(cities);
-    //console.log(cities.geonames);
 
-    $(cities.geonames).each(function(index,item){
-      //console.log(item.name , item.geonameId);
-      var selectOption = $("<option>")
-      selectOption.attr("value",item.geonameId).append(item.name);
-      $('#cityId').append(selectOption);
-    });
-  });
+     $(states.geonames).each(function(index,item){
+       //console.log(item.name , item.geonameId);
+       var selectOption = $("<option>")
+       selectOption.attr("value",item.geonameId).attr("data-value",item.name).append(item.name);
+       $('#stateId').append(selectOption);
+     });
+   });
+
+
+
+   $(document).on("change","#stateId",function(){
+     $('#cityId option:not(option:first)').remove(); // clear cities
+     $("[name='state']").val($(this).find('option:selected').attr("data-value"));
+     var geonameid= $(this).val(); //get country id
+     var citiesURL = 'http://api.geonames.org/childrenJSON?lang='+language+'&geonameId='+geonameid+'&username=abdulnaser_mohsen'; //url that get your cities
+
+
+
+     var cities = getAJAX(citiesURL);
+     //console.log(cities);
+     //console.log(cities.geonames);
+
+
+
+     $(cities.geonames).each(function(index,item){
+       //console.log(item.name , item.geonameId);
+       var selectOption = $("<option>")
+       selectOption.attr("value",item.geonameId).attr("data-value",item.name).append(item.name);
+       $('#cityId').append(selectOption);
+     });
+   });
+
+   $(document).on("change","#cityId",function(){
+     $("[name='city']").val($(this).find('option:selected').attr("data-value"));
+   });
 
 });

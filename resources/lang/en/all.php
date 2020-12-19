@@ -62,6 +62,8 @@ return [
     'logout'=>'Logout',
     'visit_shop'=>'Visit Shop',
     'admin_area'=>'Admin Area',
+    'receipts'=>'Receipts',
+
 
 
 

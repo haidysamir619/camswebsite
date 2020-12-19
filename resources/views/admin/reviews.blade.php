@@ -1,4 +1,3 @@
-
 @extends('layout.all_admin')
 @section('title', 'reviews')
 @section('content')

@@ -9,10 +9,11 @@ class Receipt extends Model
 {
     use HasFactory;
 
-    public function users(){
-        return  $this->hasOne('App\Models\User');
-  }
+
+  public function user(){//
+    return $this->belongsTo('App\Models\User');
+}
   public function orders(){
-    return $this->hasOne('App\Models\Receipt');
+    return $this->hasMany('App\Models\Order');
 }
 }

@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\Receipt;
 use App\Models\Order;
 
+use App\Models\Product;
 
 class CartController extends Controller
 {
@@ -136,6 +137,10 @@ public function  continuetocheckout(Request $request){
     }
     return redirect()->route('cart');
 
+}
+public function getorders(){
+    $receipts=Receipt::with('user','orders','orders.product')->get();
+    return view('admin/orders',compact('receipts'));
 
 }
 }
