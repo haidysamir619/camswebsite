@@ -52,7 +52,7 @@ class MemberController extends Controller
         $member->city=$request->get('city');
         $member->country=$request->get('country');
         $member->state=$request->get('state');
-        $member->password=$request->get('password');
+        $member->password= Hash::make($request->get('password'));
 
         if($request->hasFile('image')){
             $file=$request->file('image');
@@ -136,7 +136,7 @@ class MemberController extends Controller
         $member->city=$request->get('city');
         $member->country=$request->get('country');
         $member->state=$request->get('state');
-        $member->password=$request->get('password');
+        $member->password= Hash::make($request->get('password'));
         if($request->hasFile('image')){
             $file=$request->file('image');
             $image_name =time().$file->getClientOriginalName();

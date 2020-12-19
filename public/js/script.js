@@ -209,6 +209,7 @@ $('.edit-profile').on('dblclick',function(){
   //console.log(countries);
   //console.log(countries.geonames);
   $(countries.geonames).each(function(index,item){
+
     //console.log(item.countryName , item.geonameId);
     var selectOption = $("<option>")
     selectOption.attr("value",item.geonameId).append(item.countryName);
@@ -221,12 +222,10 @@ $('.edit-profile').on('dblclick',function(){
     $('.chosen-city').remove();
     $('.chosen-country').remove();
     $('.chosen-state').remove();
-
-
     $('#stateId option:not(option:first)').remove(); // clear states
 
     var geonameid= $(this).val(); //get country id
-    var statesURL = 'http://api.geonames.org/childrenJSON?lang='+language+'&k='+geonameid+'&username=abdulnaser_mohsen'; //url that get your states
+    var statesURL = 'http://api.geonames.org/childrenJSON?lang='+language+'&geonameId='+geonameid+'&username=abdulnaser_mohsen'; //url that get your states
 
     var states = getAJAX(statesURL);
     console.log(states);
@@ -251,7 +250,6 @@ $('.edit-profile').on('dblclick',function(){
     //console.log(cities.geonames);
 
     $(cities.geonames).each(function(index,item){
-
       //console.log(item.name , item.geonameId);
       var selectOption = $("<option>")
       selectOption.attr("value",item.geonameId).append(item.name);
