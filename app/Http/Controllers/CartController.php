@@ -25,7 +25,6 @@ class CartController extends Controller
         }else{
         $productcount=0;
         $totalprice=0;
-
         foreach ($carts as $cart):
             $price=$cart->product->price;
             $quantity=$cart->quantity;//
@@ -77,21 +76,12 @@ return redirect()->back()->with(['added'=>'please login first']);
         else{
         $productcount=0;
         $totalprice=0;
-
         foreach ($products as $product):
             $price=$product->product->price;
             $quantity=$product->quantity;//
             $totalprice+=$price*$quantity;
             $productcount +=$product->quantity;
         endforeach;
-        // $receipt= new Receipt();//new row in db
-        // $receipt->user_id=$user->id;
-        // $receipt->total_price=$totalprice;
-        // $receipt->save();
-        // $order= new Order();//new row in db
-        // $order->quantity=$user->id;
-        // $receipt->total_price=$totalprice;
-
         return view('checkout',compact('products','totalprice','productcount'));
     }
 
@@ -141,8 +131,10 @@ public function  continuetocheckout(Request $request){
         $order->receipt_id=$receipt->id;
         $order->save();
     }
-
-    return 'done';
+    foreach($cartproducts as $cartproduct){
+        $cartproduct->delete();
+    }
+    return redirect()->route('cart');
 
 
 }
