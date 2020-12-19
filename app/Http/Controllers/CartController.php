@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use Auth;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\Models\Receipt;
+use App\Models\Order;
+
 
 class CartController extends Controller
 {
@@ -20,10 +24,12 @@ class CartController extends Controller
 
         }else{
         $productcount=0;
+        $totalprice=0;
+
         foreach ($carts as $cart):
             $price=$cart->product->price;
             $quantity=$cart->quantity;//
-            $totalprice=$price*$quantity;
+            $totalprice+=$price*$quantity;
             $productcount +=$cart->quantity;
         endforeach;
     }
@@ -70,10 +76,12 @@ return redirect()->back()->with(['added'=>'please login first']);
         }
         else{
         $productcount=0;
+        $totalprice=0;
+
         foreach ($products as $product):
             $price=$product->product->price;
             $quantity=$product->quantity;//
-            $totalprice=$price*$quantity;
+            $totalprice+=$price*$quantity;
             $productcount +=$product->quantity;
         endforeach;
         // $receipt= new Receipt();//new row in db
@@ -86,5 +94,56 @@ return redirect()->back()->with(['added'=>'please login first']);
 
         return view('checkout',compact('products','totalprice','productcount'));
     }
+
+}
+public function  continuetocheckout(Request $request){
+    $user=Auth::user();
+    $validated = $request->validate([
+        'fullname' => ['required', 'string', 'max:255'],
+        'email' => ['required'],
+        'address' => ['required'],
+         'zip' => ['required'],
+         'state' => ['required', 'string'],
+         'country' => ['required', 'string'],
+
+        'city' => ['required', 'string'],
+        'cardname' => ['required'],
+        'phone' => ['required'],
+
+        'cardnumber' => ['required','min:3','regex:/^[\p{Arabic}0-9\-\, ]|[a-zA-Z0-9\-\, ]+$/u'],
+        'expmonth' => ['required'],
+        'expyear' => ['required'],
+        'cvv' => ['required'],
+        'sameadr' => ['required'],
+    ]);
+    $carts=Cart::with('product')->where('user_id',$user->id)->get();
+    $totalprice=0;
+
+    foreach ($carts as $cart):
+        $price=$cart->product->price;
+        $quantity=$cart->quantity;//
+        $totalprice +=$price*$quantity;
+    endforeach;
+      $receipt= new Receipt();//new row in db
+      $receipt->user_id=$user->id;
+      $receipt->address=$request->address;
+      $receipt->city=$request->city;
+      $receipt->phone=$request->phone;
+      $receipt->country=$request->country;
+      $receipt->state=$request->state;
+      $receipt->total_price=$totalprice;
+      $receipt->save();
+    $cartproducts=Cart::where('user_id',$user->id)->get();
+    foreach($cartproducts as $cartproduct){
+        $order= new Order();//new row in db
+        $order->quantity=$cartproduct->quantity;
+        $order->product_id=$cartproduct->product_id;
+        $order->receipt_id=$receipt->id;
+        $order->save();
+    }
+
+    return 'done';
+
+
 }
 }
