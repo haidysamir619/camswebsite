@@ -3,9 +3,7 @@
 @section('content')
     <section id="sign-in">
       <div class="container">
-
         <div class="w-100 color2">
-
         <h2 class="text-center">{{__('all.signin')}}</h2>
         </div>
       <form method="post" action="{{ route('login') }}" enctype="multipart/form-data">
@@ -41,15 +39,9 @@
             </div>
         </div>
     </div>
-
-
   <button type="submit" class="btn btn-primary">{{__('all.signin')}}</button>
-
 </form>
 <div class="w-100 color2"></div>
-
 </div>
-
     </section>
-
 @endsection

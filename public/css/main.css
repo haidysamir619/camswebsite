@@ -754,7 +754,8 @@ h3 {
 	font-size: 20px;
 	padding: 20px 10px;
 	background: #ddd;
-	margin-bottom: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
 }
 
 #category-page .category-title {

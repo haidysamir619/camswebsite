@@ -10,26 +10,34 @@
              action="{{route('add_member')}}" method="post" enctype="multipart/form-data">
              {{-- <form action="{{route('register')}}" method="post"> --}}
                 @csrf
-                 <div class="form-row mb-3">
+                <div class="form-row my-3">
                     <div class="col">
-                       <input  value="{{ old('name_ar') }}" class="@error('name') is-invalid @enderror form-control"  type="text" name="name_ar" placeholder="your name in arabic" pattern="^[\u0621-\u064A ]+$" title="your name must be in Arabic character only" autocomplete="on" autofocus  required >
-                       @error('name_ar')
-                            <span class="bg-danger" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                       <label for="exampleInputEmail1">{{__('all.name_ar')}}</label>
+
+                    <input  value="{{ old('name_ar') }}" class="@error('name') is-invalid @enderror form-control"  type="text" name="name_ar" placeholder="your name in arabic" title="your name must be in Arabic character only" autocomplete="on" autofocus   >
+                    @error('name_ar')
+                    <span class="bg-danger" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
                     </div>
+                </div>
+                    <div class="form-row my-3">
+
                     <div class="col">
-                       <input type="text"  value="{{ old('name_en') }}" name="name_en" class="form-control" placeholder="your name in english" pattern="^[a-zA-Z ]+$" title="your name must be in English character only" autocomplete="on" required>
+                        <label for="exampleInputEmail1">{{__('all.name_en')}}</label>
+
+                       <input type="text"   value="{{ old('name_en') }}" name="name_en" class="form-control" placeholder="your name in english"  title="your name must be in English character only" autocomplete="on" >
+                       @error('name_en')
+                       <span class="bg-danger" role="alert">
+                           <strong>{{ $message }}</strong>
+                       </span>
+                   @enderror
                     </div>
-                    @error('name_en')
-                        <span class="bg-danger" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+
                  </div>
 
-                 <div class="form-group mb-3">
+         <div class="form-group mb-3">
                     <label for="exampleInputEmail1">{{__('all.email')}}</label>
                     <input type="email"  value="{{ old('email') }}" name="email" title="your email must be like that name@domain-name.com" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="name@domain-name.com"  pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"required >
                      @error('email')

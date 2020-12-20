@@ -13,7 +13,6 @@ class ReviewController extends Controller
         $reviewsexist=Feedback::get();
         if($reviewsexist->isEmpty()){
             return view('admin/reviews')->with('session','no review to show');
-
         }
         else{
         $reviews=Feedback::with('user','product')->get();//user

@@ -36,7 +36,7 @@ Route::get('/product_show/{id}',[MainController::class,'productshow'])->name('pr
 /*end MainController */
 
 /*start CartController */
-Route::get('/cart',[CartController::class,'cart'])->name('cart');
+Route::get('/cart',[CartController::class,'cart'])->name('cart')->middleware('auth');
 Route::get('/add_to_cart/{id}',[CartController::class,'addtocart'])->name('add_to_cart');
 Route::get('/delete_from_cart/{id}',[CartController::class,'deletefromcart'])->name('delete_from_cart');
 Route::get('/process_to_checkout',[CartController::class,'processtocheckout'])->name('process_to_checkout');
@@ -48,7 +48,7 @@ Route::get('/get_orders',[CartController::class,'getorders'])->name('get_orders'
 
 /*start FavouriteController */
 Route::get('/add_to_favourite/{id}',[FavouriteController::class,'addtofavourite'])->name('add_to_favourite');
-Route::get('/favouritelist',[FavouriteController::class,'favouritelist'])->name('favouritelist');
+Route::get('/favouritelist',[FavouriteController::class,'favouritelist'])->name('favouritelist')->middleware('auth');
 Route::get('/delete_from_favourite/{id}',[FavouriteController::class,'deletefromfavourite'])->name('delete_from_favourite');
 
 /*end FavouriteController */
@@ -112,3 +112,6 @@ Route::get('/home', [MainController::class, 'index'])->name('home');
 Route::post('/search', [MainController::class, 'search'])->name('search');
 Route::get('/search', [MainController::class, 'search'])->name('search');
 Route::get('/checkout', [MainController::class, 'checkout'])->name('checkout');
+Route::post('/get_products_order', [MainController::class, 'getproductsorder'])->name('get_products_order');
+Route::post('/sort_review', [MainController::class, 'sortreview'])->name('sort_review');
+

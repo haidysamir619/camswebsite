@@ -77,15 +77,20 @@
                <div class="float-left">
                   <span class="reviews-count">{{__('all.reviews')}} (<span>{{$reviews->count()}}</span>)</span>
                </div>
+            <form action="{{route('sort_review')}}" method="POST">
+                @csrf
                <div class="sort text-right">
                   <span>sortby:</span>
-                  <select class="" name="">
-                     <option value="">most recent</option>
-                     <option value="">high rating first</option>
-                     <option value="">low rating first</option>
+                  <select class="" name="selete_review">
+                     <option value="recent">most recent</option>
+                     <option value="desc">high rating first</option>
+                     <option value="asc">low rating first</option>
                   </select>
+                <input type="hidden" name="productid" value="{{$product->id}}">
+                  <input type="submit">
                </div>
             </div>
+        </form>
             <div class="clearfix">
             </div>
             <div class="reviews-block">

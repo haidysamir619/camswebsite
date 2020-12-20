@@ -51,7 +51,7 @@ class MainController extends Controller
         $products=Product::with('category')->where('category_id',$id)->get();
         $categoryname=Category::find($id);
         // return $categoryname->name_ar;
-        return view('category',compact('products','categoryname'));
+        return view('category',compact('products','categoryname','id'));
         // foreach($products as $product)
         // {
         //     return $products->category->name_ar;
@@ -130,7 +130,42 @@ class MainController extends Controller
         return redirect()->back()->with(['added'=>'comment added']);
     }
     }
-    public function checkout(){
-
+    public function getproductsorder(Request $request){
+            if($request->selete_product=="toprated"){
+                $products=Product::with('category')->where('category_id',$request->cat)->orderBy('rate','desc')->get();
+                $categoryname=Category::find($request->cat);
+                $id=$request->cat;
+             }
+            else{
+            $products=Product::with('category')->where('category_id',$request->cat)->orderBy('price', $request->selete_product)->get();
+            $categoryname=Category::find($request->cat);
+            $id=$request->cat;
+            }
+            if($request->ajax())
+            {
+                return response()->json(['success'=> 'Added Successfully' ]);
+            }
+            return view('category',compact('products','categoryname','id'));
+            // fo
     }
+    public function sortreview(Request $request){
+        if($request->selete_review=="recent"){
+            $reviews=Feedback::with('user','product')->where('product_id',$request->productid)->orderBy('id','desc')->get();//user
+            $product=Product::find($request->productid);
+
+        }
+
+        else{
+            $reviews=Feedback::with('user','product')->where('product_id',$request->productid)->orderBy('rate',$request->selete_review)->get();//user
+            $product=Product::find($request->productid);
+
+        }
+        // if($request->ajax())
+        // {
+        //     return response()->json(['success'=> 'Added Successfully' ]);
+        // }
+        return view('product',compact('reviews','product'));
+        //
+}
+
 }

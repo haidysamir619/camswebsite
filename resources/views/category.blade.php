@@ -20,18 +20,24 @@
                   <span class="category-title">{{$categoryname->$name}}</span>
                   <!-- <span class="item-found">(<span>2</span>)item found</span> -->
                </div>
+            <form id="sortform" action="{{Route('get_products_order')}}" method="POST">
+                @csrf
                <div class="sort text-right">
                   <span>sortby:</span>
-                  <select class="" name="">
-                     <option value="">top rated</option>
-                     <option value="">price:low to high</option>
-                     <option value="">price:hight to low</option>
+                  <select class="" name="selete_product">
+                     <option value="toprated">top rated</option>
+                     <option value="asc">price:low to high</option>
+                     <option value="desc">price:hight to low</option>
                   </select>
                </div>
+               <input type="hidden" name="cat" value="{{$id}}">
+               <input type="submit" class="border-0 float-right">
+            </form>
             </div>
             <div class="clearfix">
             </div>
-            <div class="row all-products">
+
+            <div class="row all-products" id="products">
                 @foreach ($products as $product)
 
                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
@@ -97,6 +103,6 @@
 
 
             </div>
-         </div>
+        </div>
       </section>
 @endsection

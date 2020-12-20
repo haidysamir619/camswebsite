@@ -84,9 +84,7 @@
                      </div>
                     <button type="button" name="button" class="checkout-button mx-auto d-block" onclick="location.href='{{route('process_to_checkout')}}'">processed to checkout</button>
                   </div>
-                  <p>Questions?
-                     <a href="index.html#contact_us">Contact Customer Service</a>
-                  </p>
+                  
                </div>
             </div>
          </div>
